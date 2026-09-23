@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>FOCO SEGURO</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f9ff;
+            --soft: #eaf3fc;
+            --soft2: #dcebfa;
+            --ink: #0f2a4a;
+            --mut: #4b6079;
+            --blue: #1257b0;
+            --blue2: #0b3d80;
+            --or: #f47a1f;
+            --orh: #d9650f;
+            --card: #fff;
+            --line: #cfe0f3;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0a1626;
+                --soft: #102540;
+                --soft2: #163157;
+                --ink: #e8f0fb;
+                --mut: #a6b8d0;
+                --blue: #6aa8f5;
+                --blue2: #9cc6fa;
+                --card: #122843;
+                --line: #24446b
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0a1626;
+            --soft: #102540;
+            --soft2: #163157;
+            --ink: #e8f0fb;
+            --mut: #a6b8d0;
+            --blue: #6aa8f5;
+            --blue2: #9cc6fa;
+            --card: #122843;
+            --line: #24446b
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            overscroll-behavior: none
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font: 400 16px/1.5 "Nunito Sans", system-ui, sans-serif
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Sora, system-ui, sans-serif;
+            line-height: 1.15;
+            margin: 0
+        }
+
+        a {
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--or);
+            outline-offset: 3px
+        }
+
+        .app {
+            height: 100%;
+            display: flex;
+            flex-direction: column
+        }
+
+        header {
+            flex: none;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            background: var(--card);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font: 800 18px Sora, sans-serif;
+            text-decoration: none;
+            color: var(--blue2)
+        }
+
+        nav {
+            display: flex;
+            gap: 4px
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 99px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--mut)
+        }
+
+        nav a:hover {
+            background: var(--soft)
+        }
+
+        nav a.on {
+            background: var(--blue);
+            color: #fff
+        }
+
+        :root[data-theme="dark"] nav a.on,
+        :root:not([data-theme="light"]) nav a.on {
+            color: #06121f
+        }
+
+        nav i {
+            font-style: normal
+        }
+
+        main {
+            flex: 1;
+            position: relative;
+            min-height: 0
+        }
+
+        .screen {
+            position: absolute;
+            inset: 0;
+            display: none;
+            padding: 20px 24px 100px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain
+        }
+
+        .screen.on {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: in .22s ease-out
+        }
+
+        @keyframes in {
+            from {
+                opacity: 0;
+                transform: translateX(16px)
+            }
+        }
+
+        .in {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto
+        }
+
+        .btn {
+            display: inline-block;
+            border: 0;
+            cursor: pointer;
+            font: 700 16px Sora, sans-serif;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform .15s, background .15s
+        }
+
+        .btn:active {
+            transform: scale(.97)
+        }
+
+        .b1 {
+            background: var(--or);
+            color: #1b1002
+        }
+
+        .b1:hover {
+            background: var(--orh);
+            color: #fff
+        }
+
+        .b2 {
+            background: transparent;
+            color: var(--blue2);
+            box-shadow: inset 0 0 0 2px var(--blue)
+        }
+
+        .b2:hover {
+            background: var(--soft)
+        }
+
+        .cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .h2 {
+            font-size: clamp(24px, 3.4vw, 36px);
+            color: var(--blue2);
+            margin-bottom: 8px
+        }
+
+        .lead {
+            color: var(--mut);
+            margin: 0 0 20px
+        }
+
+        /* trust */
+        .tcard {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-left: 6px solid var(--or);
+            border-radius: 16px;
+            padding: 22px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px 20px;
+            align-items: center
+        }
+
+        .shield {
+            width: 60px;
+            height: 60px
+        }
+
+        .tcard h2 {
+            font-size: clamp(18px, 2.4vw, 24px);
+            letter-spacing: .02em;
+            color: var(--blue2)
+        }
+
+        .tcard p {
+            margin: 6px 0 0;
+            color: var(--mut)
+        }
+
+        .tind {
+            grid-column: 1/-1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px
+        }
+
+        .ti {
+            background: var(--soft);
+            border-radius: 12px;
+            padding: 14px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2px 10px
+        }
+
+        .ti .ic {
+            font-size: 22px;
+            grid-row: span 2
+        }
+
+        .ti b {
+            font: 700 15px Sora, sans-serif
+        }
+
+        .ti span {
+            font-size: 14px;
+            color: var(--mut);
+            line-height: 1.35
+        }
+
+        .strip {
+            margin: 16px 0 20px;
+            background: var(--blue2);
+            color: #fff;
+            text-align: center;
+            padding: 11px 14px;
+            border-radius: 12px;
+            font: 700 12px/1.4 Sora, sans-serif;
+            letter-spacing: .06em
+        }
+
+        .strip i {
+            color: var(--or);
+            font-style: normal;
+            padding: 0 8px
+        }
+
+        /* hero */
+        .hg {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 32px;
+            align-items: center
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 5vw, 54px);
+            font-weight: 800;
+            color: var(--blue2);
+            letter-spacing: -.02em
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--mut);
+            max-width: 50ch;
+            margin: 16px 0 24px
+        }
+
+        .hero svg {
+            width: 100%;
+            height: auto;
+            max-height: 56vh;
+            justify-self: center
+        }
+
+        /* steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px
+        }
+
+        .step .n {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--blue);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font: 800 17px Sora, sans-serif;
+            margin-bottom: 12px
+        }
+
+        :root[data-theme="dark"] .step .n,
+        :root:not([data-theme="light"]) .step .n {
+            color: #06121f
+        }
+
+        .step:nth-child(3) .n {
+            background: var(--or);
+            color: #1b1002
+        }
+
+        .step h3 {
+            font-size: 19px;
+            margin-bottom: 6px
+        }
+
+        .step p {
+            margin: 0;
+            color: var(--mut)
+        }
+
+        /* game */
+        #teste .in {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 980px
+        }
+
+        .top {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+            flex: none;
+            margin-bottom: 12px
+        }
+
+        .top .prog {
+            flex: none;
+            width: 100%
+        }
+
+        .st {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            flex: 1
+        }
+
+        .stat {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 8px 12px
+        }
+
+        .stat small {
+            display: block;
+            color: var(--mut);
+            font-size: 12px;
+            line-height: 1.2
+        }
+
+        .stat b {
+            font: 800 22px Sora, sans-serif;
+            color: var(--blue2)
+        }
+
+        .prog {
+            height: 8px;
+            border-radius: 9px;
+            background: var(--soft2);
+            overflow: hidden;
+            margin-bottom: 12px;
+            flex: none
+        }
+
+        .prog div {
+            height: 100%;
+            width: 0;
+            background: var(--or);
+            transition: width .1s linear
+        }
+
+        .arena {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            background: var(--card);
+            border: 2px solid var(--line);
+            border-radius: 20px;
+            overflow: hidden;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            background-image: radial-gradient(var(--line) 1.2px, transparent 1.2px);
+            background-size: 26px 26px
+        }
+
+        .ov {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 24px;
+            background: color-mix(in srgb, var(--card) 92%, transparent);
+            z-index: 2
+        }
+
+        .ov[hidden] {
+            display: none
+        }
+
+        .ov h3 {
+            color: var(--blue2);
+            font-size: 22px;
+            margin-bottom: 8px
+        }
+
+        .ov p {
+            margin: 0 auto 18px;
+            color: var(--mut);
+            max-width: 42ch
+        }
+
+        .tg {
+            position: absolute;
+            width: 62px;
+            height: 62px;
+            margin: -31px 0 0 -31px;
+            border-radius: 50%;
+            border: 0;
+            cursor: pointer;
+            padding: 0;
+            background: radial-gradient(circle, #fff 0 14%, var(--or) 15% 45%, #fff 46% 58%, var(--or) 59%);
+            box-shadow: 0 0 0 6px rgba(244, 122, 31, .25);
+            animation: pop .15s ease-out
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(.4);
+                opacity: 0
+            }
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--mut);
+            margin: 10px 0 0;
+            text-align: center;
+            flex: none
+        }
+
+        /* result */
+        .rg {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.5fr;
+            gap: 14px;
+            margin: 18px 0
+        }
+
+        .rg .stat {
+            padding: 16px
+        }
+
+        .rg .stat b {
+            font-size: 30px
+        }
+
+        .hist {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 100px;
+            margin-top: 22px
+        }
+
+        .hist div {
+            flex: 1;
+            background: var(--soft2);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            min-width: 0
+        }
+
+        .hist div.cur {
+            background: var(--or)
+        }
+
+        .hist div span {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            color: var(--mut)
+        }
+
+        .msg {
+            background: var(--soft);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px
+        }
+
+        .care {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 6px solid var(--or);
+            background: var(--card);
+            border-top: 1px solid var(--line);
+            border-right: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .care[hidden] {
+            display: none
+        }
+
+        .care .btn {
+            flex: none;
+            padding: 12px 18px
+        }
+
+        @media (max-width:860px) {
+            .care {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                font-size: 14px
+            }
+        }
+
+        /* privacy */
+        .priv {
+            background: var(--blue2);
+            color: #fff;
+            border-radius: 24px;
+            padding: 36px 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center
+        }
+
+        .priv h2 {
+            font-size: clamp(24px, 3.4vw, 36px)
+        }
+
+        .priv h2 em {
+            font-style: normal;
+            color: var(--or)
+        }
+
+        .priv p {
+            color: #cfe0f7;
+            margin: 12px 0 0;
+            font-size: 17px
+        }
+
+        .pv {
+            display: grid;
+            gap: 12px
+        }
+
+        .pv div {
+            background: rgba(255, 255, 255, .09);
+            border: 1px solid rgba(255, 255, 255, .18);
+            border-radius: 14px;
+            padding: 14px 16px
+        }
+
+        .pv b {
+            font-family: Sora, sans-serif;
+            display: block
+        }
+
+        .pv span {
+            color: #cfe0f7;
+            font-size: 14px
+        }
+
+        .no {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px
+        }
+
+        .no span {
+            border: 1.5px solid var(--or);
+            color: #ffd2ae;
+            border-radius: 99px;
+            padding: 4px 12px;
+            font: 700 12px Sora, sans-serif
+        }
+
+        /* support */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .sc {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-top: 5px solid var(--blue);
+            border-radius: 16px;
+            padding: 22px
+        }
+
+        .sc:nth-child(2) {
+            border-top-color: var(--or)
+        }
+
+        .sc .ic {
+            font-size: 28px
+        }
+
+        .sc h3 {
+            margin: 8px 0 6px;
+            font-size: 20px
+        }
+
+        .sc p {
+            margin: 0 0 12px;
+            color: var(--mut)
+        }
+
+        .sc a {
+            font-weight: 700;
+            color: var(--blue);
+            text-decoration: none;
+            border-bottom: 2px solid var(--or)
+        }
+
+        .helpmsg {
+            margin-top: 20px;
+            background: var(--soft);
+            border-radius: 16px;
+            padding: 18px 22px;
+            font: 700 clamp(17px, 2.2vw, 21px)/1.4 Sora, sans-serif;
+            color: var(--blue2);
+            text-align: center
+        }
+
+        .foot {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--mut)
+        }
+
+        .foot b {
+            font: 800 14px Sora, sans-serif;
+            color: var(--blue2)
+        }
+
+        /* mobile app */
+        @media (max-width:860px) {
+            header {
+                height: 52px;
+                padding: 0 16px;
+                justify-content: center
+            }
+
+            nav {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 30;
+                justify-content: space-around;
+                background: var(--card);
+                border-top: 1px solid var(--line);
+                padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+                gap: 0
+            }
+
+            nav a {
+                flex-direction: column;
+                gap: 0;
+                padding: 6px 8px;
+                font-size: 11px;
+                border-radius: 12px;
+                flex: 1;
+                text-align: center
+            }
+
+            nav i {
+                font-size: 20px
+            }
+
+            main {
+                margin-bottom: 64px
+            }
+
+            .screen {
+                padding: 14px 16px 110px;
+                overflow-x: hidden;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch
+            }
+
+            #apoio {
+                justify-content: flex-start;
+            }
+
+            #apoio .in {
+                padding-bottom: 30px;
+            }
+
+            .hg,
+            .priv,
+            .rg {
+                grid-template-columns: 1fr
+            }
+
+            .hg {
+                gap: 10px
+            }
+
+            .hero svg {
+                max-height: 26vh;
+                order: -1
+            }
+
+            .hero p {
+                font-size: 16px;
+                margin: 10px 0 16px
+            }
+
+            .hero h1 {
+                font-size: 28px
+            }
+
+            .cta .btn {
+                flex: 1;
+                padding: 13px 10px
+            }
+
+            .tcard {
+                padding: 16px;
+                grid-template-columns: auto 1fr;
+                gap: 10px 14px
+            }
+
+            .shield {
+                width: 46px;
+                height: 46px
+            }
+
+            .tcard p {
+                font-size: 14px;
+                line-height: 1.4
+            }
+
+            .tind {
+                grid-template-columns: 1fr;
+                gap: 8px
+            }
+
+            .ti {
+                padding: 10px 12px
+            }
+
+            .ti span {
+                font-size: 13px
+            }
+
+            .strip {
+                font-size: 10px;
+                padding: 9px 8px;
+                margin: 12px 0 14px
+            }
+
+            .strip i {
+                padding: 0 4px
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 10px
+            }
+
+            .step {
+                padding: 14px 16px;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 0 14px
+            }
+
+            .step .n {
+                grid-row: span 2;
+                margin: 0
+            }
+
+            .step h3 {
+                font-size: 17px
+            }
+
+            .step p {
+                font-size: 14px
+            }
+
+            .lead {
+                margin-bottom: 14px;
+                font-size: 15px
+            }
+
+            .st {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px
+            }
+
+            .top {
+                margin-bottom: 8px
+            }
+
+            .stat b {
+                font-size: 19px
+            }
+
+            .stat {
+                padding: 6px 10px
+            }
+
+            .st {
+                grid-template-columns: repeat(4, 1fr)
+            }
+
+            .stat small {
+                font-size: 10px
+            }
+
+            .stat b {
+                font-size: 17px
+            }
+
+            .stat {
+                padding: 6px 8px
+            }
+
+            .priv {
+                padding: 20px 18px;
+                gap: 14px
+            }
+
+            .priv p {
+                font-size: 15px;
+                margin-top: 8px
+            }
+
+            .pv {
+                gap: 8px
+            }
+
+            .pv div {
+                padding: 10px 14px
+            }
+
+            .no {
+                margin-top: 10px
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 10px
+            }
+
+            .sc {
+                padding: 14px 16px;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 0 12px
+            }
+
+            .sc .ic {
+                grid-row: span 3;
+                font-size: 26px
+            }
+
+            .sc h3 {
+                margin: 0 0 2px;
+                font-size: 17px
+            }
+
+            .sc p {
+                font-size: 14px;
+                margin: 0 0 4px
+            }
+
+            .helpmsg {
+                margin-top: 12px;
+                padding: 14px
+            }
+
+            .rg {
+                gap: 10px;
+                margin: 12px 0
+            }
+
+            .hist {
+                margin-top: 18px;
+                height: 80px
+            }
+        }
+
+        @media (max-height:680px) and (max-width:860px) {
+            .hero svg {
+                max-height: 20vh
+            }
+
+            .hero p {
+                font-size: 15px
+            }
+
+            .tcard p {
+                font-size: 13px
+            }
+
+            .ti span {
+                display: none
+            }
+
+            .pv span {
+                display: none
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <a class="logo" href="#trust" aria-label="FOCO SEGURO"><svg width="32" height="32" viewBox="0 0 40 40"
+                    aria-hidden="true">
+                    <path d="M20 3l14 5v10c0 9-6 16-14 19C12 34 6 27 6 18V8z" fill="#1257b0" />
+                    <circle cx="20" cy="19" r="8" fill="none" stroke="#fff" stroke-width="2.5" />
+                    <circle cx="20" cy="19" r="3.2" fill="#f47a1f" />
+                </svg>FOCO SEGURO</a>
+            <nav aria-label="Principal">
+                <a href="#trust" data-t="inicio"><i>🏠</i>Início</a><a href="#como" data-t="como"><i>🧭</i>Como
+                    funciona</a><a href="#teste" data-t="teste"><i>🎯</i>Teste</a><a href="#privacidade"
+                    data-t="privacidade"><i>🔒</i>Privacidade</a><a href="#apoio" data-t="apoio" id="apoioTab" hidden><i>🤝</i>Apoio</a>
+            </nav>
+        </header>
+        <main>
+
+            <section class="screen" id="trust" data-t="inicio">
+                <div class="in">
+                    <div class="tcard" role="region" aria-label="Privacidade e confiança">
+                        <svg class="shield" viewBox="0 0 64 64" aria-hidden="true">
+                            <path d="M32 4l24 8v16c0 15-10 26-24 32C18 54 8 43 8 28V12z" fill="#1257b0" />
+                            <rect x="21" y="29" width="22" height="16" rx="3" fill="#fff" />
+                            <path d="M25 29v-5a7 7 0 0114 0v5" fill="none" stroke="#fff" stroke-width="3.5" />
+                            <circle cx="32" cy="37" r="2.6" fill="#f47a1f" />
+                        </svg>
+                        <div>
+                            <h2>SEUS DADOS ESTÃO PROTEGIDOS</h2>
+                            <p>O Foco Seguro foi pensado para proteger sua privacidade. Seus resultados individuais são
+                                privados, não geram ranking e não são utilizados para identificar ou punir
+                                colaboradores.</p>
+                        </div>
+                        <div class="tind">
+                            <div class="ti"><span class="ic">🔒</span><b>Resultado individual privado</b><span>Seu
+                                    desempenho pertence somente a você.</span></div>
+                            <div class="ti"><span class="ic">👤</span><b>Sem identificação
+                                    individual</b><span>Indicadores coletivos são apresentados de forma
+                                    anonimizada.</span></div>
+                            <div class="ti"><span class="ic">🤝</span><b>Proteção e participação</b><span>Proposta
+                                    estruturada com participação das representações de segurança e dos
+                                    trabalhadores.</span></div>
+                        </div>
+                    </div>
+                    <div class="strip">PRIVACIDADE POR DESIGN<i>•</i>SEM RANKING<i>•</i>SEM EXPOSIÇÃO INDIVIDUAL</div>
+                    <div class="cta" style="justify-content:center"><a class="btn b1" href="#hero">Continuar</a></div>
+                </div>
+            </section>
+
+            <section class="screen hero" id="hero" data-t="inicio">
+                <div class="in hg">
+                    <div>
+                        <h1>Seu foco também faz parte da sua segurança.</h1>
+                        <p>Um momento rápido dentro do DDS para estimular atenção, autoconsciência e prevenção antes do
+                            início das atividades.</p>
+                        <div class="cta"><a class="btn b1" href="#teste">Começar teste</a><a class="btn b2"
+                                href="#como">Como funciona</a></div>
+                    </div>
+                    <svg viewBox="0 0 460 460" role="img" aria-label="Trabalhador de campo usando o celular">
+                        <circle cx="230" cy="230" r="200" fill="#dcebfa" />
+                        <circle cx="230" cy="230" r="150" fill="none" stroke="#1257b0" stroke-opacity=".25"
+                            stroke-dasharray="4 10" stroke-width="3" />
+                        <path d="M356 92l-22 40h18l-14 34 34-44h-18z" fill="#f47a1f" />
+                        <path d="M96 130c0-24 22-34 44-34s44 10 44 34" fill="none" stroke="#1257b0" stroke-width="5"
+                            stroke-linecap="round" opacity=".5" />
+                        <circle cx="140" cy="300" r="6" fill="#f47a1f" />
+                        <circle cx="360" cy="330" r="9" fill="#1257b0" opacity=".4" />
+                        <rect x="150" y="270" width="160" height="150" rx="40" fill="#f47a1f" />
+                        <path d="M190 270l40 60 40-60" fill="#fff" opacity=".85" />
+                        <rect x="150" y="360" width="160" height="16" fill="#fff" opacity=".85" />
+                        <circle cx="230" cy="220" r="52" fill="#f2c4a0" />
+                        <path d="M176 208c0-44 22-64 54-64s54 20 54 64z" fill="#1257b0" />
+                        <rect x="166" y="204" width="128" height="14" rx="7" fill="#0b3d80" />
+                        <rect x="222" y="138" width="16" height="30" rx="6" fill="#0b3d80" />
+                        <circle cx="212" cy="232" r="4" fill="#0f2a4a" />
+                        <circle cx="248" cy="232" r="4" fill="#0f2a4a" />
+                        <path d="M216 250q14 10 28 0" fill="none" stroke="#0f2a4a" stroke-width="3"
+                            stroke-linecap="round" />
+                        <path d="M170 300c-20 30-10 60 40 66" fill="none" stroke="#f47a1f" stroke-width="30"
+                            stroke-linecap="round" />
+                        <g transform="rotate(-8 300 320)">
+                            <rect x="268" y="270" width="70" height="120" rx="12" fill="#0f2a4a" />
+                            <rect x="274" y="280" width="58" height="100" rx="7" fill="#eaf3fc" />
+                            <circle cx="303" cy="325" r="16" fill="#fff" stroke="#f47a1f" stroke-width="5" />
+                            <circle cx="303" cy="325" r="5" fill="#f47a1f" />
+                        </g>
+                        <path d="M290 300c20-10 30 10 8 24" fill="none" stroke="#f2c4a0" stroke-width="18"
+                            stroke-linecap="round" />
+                        <path d="M364 180l24-10v22c0 16-10 26-24 32-14-6-24-16-24-32v-22z" fill="#1257b0" />
+                        <path d="M350 204l8 8 14-16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </section>
+
+            <section class="screen" id="como" data-t="como">
+                <div class="in">
+                    <h2 class="h2">Como funciona</h2>
+                    <p class="lead">Três passos simples, dentro do momento de segurança que você já conhece.</p>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="n">1</div>
+                            <h3>Participe do DDS</h3>
+                            <p>O Foco Seguro faz parte do momento de segurança.</p>
+                        </div>
+                        <div class="step">
+                            <div class="n">2</div>
+                            <h3>Faça o teste</h3>
+                            <p>Um minigame de 30–45 segundos mede atenção, precisão e tempo de reação.</p>
+                        </div>
+                        <div class="step">
+                            <div class="n">3</div>
+                            <h3>Observe seu resultado</h3>
+                            <p>O resultado é privado e comparado somente com seu próprio histórico.</p>
+                        </div>
+                    </div>
+                    <div class="cta" style="margin-top:20px"><a class="btn b1" href="#teste">Ir para o teste</a></div>
+                </div>
+            </section>
+
+            <section class="screen" id="teste" data-t="teste">
+                <div class="in">
+                    <div class="top">
+                        <div class="st" aria-live="polite">
+                            <div class="stat"><small>Tempo</small><b id="tl">30 s</b></div>
+                            <div class="stat"><small>Alvos</small><b id="ht">0</b></div>
+                            <div class="stat"><small>Reação</small><b id="lr">—</b></div>
+                            <div class="stat"><small>Precisão</small><b id="pc">—</b></div>
+                        </div>
+                    </div>
+                    <div class="prog">
+                        <div id="pb"></div>
+                    </div>
+                    <div class="arena" id="arena">
+                        <div class="ov" id="ov">
+                            <div>
+                                <h3 id="ovh">Teste de atenção</h3>
+                                <p id="ovt">Toque nos alvos laranja assim que aparecerem. São 30 segundos e não depende
+                                    de conhecimento técnico.</p><button class="btn b1" id="go">Iniciar teste</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="note">Não é um diagnóstico. Mostra apenas seu desempenho neste momento.</p>
+                </div>
+            </section>
+
+            <section class="screen" id="resultado" data-t="teste">
+                <div class="in">
+                    <h2 class="h2">Seu resultado de hoje</h2>
+                    <p class="lead" style="margin:0">Visível somente para você, neste aparelho.</p>
+                    <div class="rg">
+                        <div class="stat"><small>Tempo de reação médio</small><b id="rt">—</b></div>
+                        <div class="stat"><small>Precisão</small><b id="rp">—</b></div>
+                        <div class="stat"><small>Seu histórico pessoal (ms)</small>
+                            <div class="hist" id="hs"></div>
+                        </div>
+                    </div>
+                    <div class="msg" id="rm">Faça o teste para ver seu resultado.</div>
+                    <div class="cta" id="resultCta" style="margin-top:14px"><a class="btn b1" href="#teste">Fazer o teste</a></div>
+                    <p class="note" id="rn" style="text-align:left"></p>
+                    <div class="msg care" id="care" hidden><span><b>Seu resultado ficou diferente do seu padrão.</b>
+                            Isso é comum e não indica nada por si só. Se quiser conversar com alguém, há canais de
+                            apoio.</span><a class="btn b1" href="#apoio">Ir para o Apoio</a></div>
+                    <div class="cta" style="margin-top:14px"><a class="btn b2" href="#hero">Voltar ao início</a></div>
+                </div>
+            </section>
+
+            <section class="screen" id="privacidade" data-t="privacidade">
+                <div class="in">
+                    <div class="priv">
+                        <div>
+                            <h2>Seus dados, <em>sua privacidade.</em></h2>
+                            <p>Cada resultado é individual e só você o vê. A empresa acompanha apenas indicadores
+                                coletivos, sem nomes e sem comparação entre pessoas.</p>
+                            <div class="no"><span>Sem ranking</span><span>Sem competição</span><span>Sem exposição
+                                    individual</span></div>
+                        </div>
+                        <div class="pv">
+                            <div><b>🔒 Dados individuais: privados</b><span>Resultado e histórico ficam com você.</span>
+                            </div>
+                            <div><b>📊 Indicadores coletivos: anonimizados</b><span>Somente visões agregadas do grupo,
+                                    sem identificar ninguém.</span></div>
+                            <div><b>🤝 Construído com participação</b><span>Trabalhadores e representações de segurança
+                                    na proposta.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="screen" id="apoio" data-t="apoio">
+                <div class="in">
+                    <h2 class="h2">Apoio</h2>
+                    <p class="lead" style="margin-bottom:14px">Cuidar de si também é prevenção. Existem caminhos para
+                        conversar com alguém.</p>
+                    <div class="cards">
+                        <div class="sc">
+                            <div class="ic">🧭</div>
+                            <h3>PRATICA</h3>
+                            <p>Acompanhamento e orientação para o seu bem-estar no trabalho.</p><a href="#apoio">Saiba
+                                mais</a>
+                        </div>
+                        <div class="sc">
+                            <div class="ic">📱</div>
+                            <h3>Telemedicina</h3>
+                            <p>Converse com um profissional de saúde à distância, sem sair do campo.</p><a
+                                href="#apoio">Saiba mais</a>
+                        </div>
+                        <div class="sc">
+                            <div class="ic">💬</div>
+                            <h3>Canais de apoio</h3>
+                            <p>Contatos confidenciais para acolhimento, dúvidas e orientação.</p><a href="#apoio">Ver
+                                canais</a>
+                        </div>
+                    </div>
+                    <div class="helpmsg">Se você perceber que precisa de ajuda, encontre um canal de apoio.</div>
+                    <p class="foot"><b>FOCO SEGURO</b> · Tecnologia a serviço da segurança e do cuidado.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script>
+        (function () {
+            var $ = function (i) { return document.getElementById(i) }, D = 30000, arena = $('arena'), run = false, end = 0, hits = [], miss = 0, stray = 0, cur = null, timers = [], tick;
+            var screens = [].slice.call(document.querySelectorAll('.screen')), tabs = [].slice.call(document.querySelectorAll('nav a'));
+            var apoioTab = $('apoioTab');
+            var resultCta = $('resultCta');
+            var testeTab = document.querySelector('nav a[href="#teste"]');
+            var completed = false;
+            var lowResult = false;
+            try {
+                completed = localStorage.getItem('fs_done_v4') === '1';
+                lowResult = localStorage.getItem('fs_low_v4') === '1';
+            } catch (e) { }
+            apoioTab.hidden = !lowResult;
+            if (testeTab) testeTab.hidden = false;
+            if (resultCta) resultCta.hidden = completed;
+            function show() {
+                var id = (location.hash || '#trust').slice(1); if (!$(id)) id = 'trust';
+                if (completed && id === 'teste') {
+                    location.hash = '#resultado';
+                    return;
+                }
+                if (id === 'apoio' && !lowResult) {
+                    location.hash = '#trust';
+                    return;
+                }
+                if (run && id !== 'teste' && id !== 'resultado') stop();
+                screens.forEach(function (s) { s.classList.toggle('on', s.id === id) });
+                var t = $(id).dataset.t; tabs.forEach(function (a) { a.classList.toggle('on', a.dataset.t === t); if (a.dataset.t === t) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current') });
+                if (id === 'teste' && !run) resetGame();
+            }
+            window.addEventListener('hashchange', show);
+            function pct() { var t = hits.length + miss + stray; return t ? Math.round(hits.length / t * 100) : null }
+            function ui() { $('ht').textContent = hits.length; var p = pct(); $('pc').textContent = p === null ? '—' : p + '%' }
+            function resetGame() { $('ov').hidden = false; $('ovh').textContent = 'Teste de atenção'; $('ovt').textContent = 'Toque nos alvos laranja assim que aparecerem. São 30 segundos e não depende de conhecimento técnico.'; $('go').textContent = 'Iniciar teste'; hits = []; miss = 0; stray = 0; ui(); $('lr').textContent = '—'; $('tl').textContent = '30 s'; $('pb').style.width = '0' }
+            function spawn() {
+                if (!run) return;
+                var b = document.createElement('button'); b.className = 'tg'; b.setAttribute('aria-label', 'Alvo');
+                b.style.left = (10 + Math.random() * 80) + '%'; b.style.top = (14 + Math.random() * 72) + '%';
+                var t0 = performance.now(); cur = b;
+                b.onpointerdown = function (e) { e.stopPropagation(); if (!run || cur !== b) return; var rt = Math.round(performance.now() - t0); hits.push(rt); $('lr').textContent = rt + ' ms'; b.remove(); cur = null; ui(); next() };
+                arena.appendChild(b);
+                timers.push(setTimeout(function () { if (cur === b) { b.remove(); cur = null; miss++; ui(); next() } }, 1500));
+            }
+            function next() { timers.push(setTimeout(spawn, 500 + Math.random() * 700)) }
+            arena.addEventListener('pointerdown', function () { if (run) { stray++; ui() } });
+            function stop() { run = false; clearInterval(tick); timers.forEach(clearTimeout); timers = []; if (cur) { cur.remove(); cur = null } }
+            $('go').onclick = function () {
+                hits = []; miss = 0; stray = 0; run = true; end = performance.now() + D; $('ov').hidden = true; $('lr').textContent = '—'; ui();
+                tick = setInterval(function () { var l = Math.max(0, end - performance.now()); $('tl').textContent = Math.ceil(l / 1000) + ' s'; $('pb').style.width = (100 - l / D * 100) + '%'; if (l <= 0) finish() }, 100);
+                next();
+            };
+            function load() { try { return JSON.parse(localStorage.getItem('fs_hist') || '[]') } catch (e) { return [] } }
+            function save(a) { try { localStorage.setItem('fs_hist', JSON.stringify(a)) } catch (e) { } }
+            function finish() {
+                stop();
+                if (!hits.length) { $('ov').hidden = false; $('ovh').textContent = 'Teste não concluído'; $('ovt').textContent = 'Nenhum alvo foi atingido. O teste não foi registrado.'; $('go').textContent = 'Tentar de novo'; return }
+                var avg = Math.round(hits.reduce(function (a, b) { return a + b }, 0) / hits.length), p = pct();
+                var h = load(), demo = !h.length, base = demo ? [418, 402, 431, 409] : h.slice(-6);
+                var mean = Math.round(base.reduce(function (a, b) { return a + b }, 0) / base.length);
+                var ah = []; try { ah = JSON.parse(localStorage.getItem('fs_acc') || '[]') } catch (e) { }
+                var am = ah.length ? ah.reduce(function (a, b) { return a + b }, 0) / ah.length : null;
+                var low = p < 70;
+                completed = true;
+                lowResult = low;
+                try {
+                    localStorage.setItem('fs_done_v4', '1');
+                    localStorage.setItem('fs_low_v4', low ? '1' : '0');
+                } catch (e) { }
+                apoioTab.hidden = !low;
+                if (testeTab) testeTab.hidden = false;
+                if (resultCta) resultCta.hidden = true;
+                $('care').hidden = !low;
+                h.push(avg); save(h.slice(-12)); ah.push(p); try { localStorage.setItem('fs_acc', JSON.stringify(ah.slice(-12))) } catch (e) { }
+                var series = base.concat([avg]).slice(-7), mx = Math.max.apply(null, series) * 1.1;
+                $('hs').innerHTML = series.map(function (v, i) { return '<div class="' + (i === series.length - 1 ? 'cur' : '') + '" style="height:' + Math.round(v / mx * 100) + '%"><span>' + v + '</span></div>' }).join('');
+                $('rt').textContent = avg + ' ms'; $('rp').textContent = p + '%';
+                var d = avg - mean;
+                $('rm').textContent = (low ? 'Seu resultado indica um nível de atenção que merece cuidado. ' : 'Seu resultado ficou dentro da faixa esperada. ') + (Math.abs(d) <= 15 ? 'Seu tempo de reação ficou próximo da sua média pessoal (' + mean + ' ms).' : 'Seu tempo de reação foi ' + Math.abs(d) + ' ms ' + (d < 0 ? 'mais rápido' : 'mais lento') + ' que a sua média pessoal (' + mean + ' ms). Variações assim são normais de um dia para o outro.');
+                $('rn').textContent = (demo ? 'Como este é seu primeiro teste, o histórico é um exemplo ilustrativo. ' : '') + 'Não é um diagnóstico nem uma avaliação. É privado e serve à sua autoconsciência.';
+
+                // Primeiro mostra o resultado. Se houver resultado baixo, aguarda alguns segundos
+                // para a pessoa visualizar como foi antes de seguir para o Apoio.
+                location.hash = '#resultado';
+                if (low) {
+                    setTimeout(function () {
+                        if (location.hash === '#resultado') location.hash = '#apoio';
+                    }, 5000);
+                }
+            }
+            show();
+        })();
+    </script>
+</body>
+
+</html>
