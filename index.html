@@ -1,3 +1,47 @@
+cade o botao de fazer o teste
+FOCO SEGURO
+
+O FOCO SEGURO é uma solução digital de prevenção que ajuda o trabalhador a identificar sinais de fadiga, perda de atenção e desgaste emocional de forma rápida, discreta e individual.
+
+Por meio de um teste simples de atenção e tempo de reação, o usuário recebe seu resultado imediatamente e consegue acompanhar seu próprio desempenho. Quando o resultado indica que é necessário mais atenção ao seu bem-estar, a plataforma direciona o trabalhador para uma área de Apoio, com orientações e canais de acolhimento.
+
+A ideia é agir antes que o problema se agrave, incentivando o autocuidado e facilitando o acesso ao suporte, sem exposição desnecessária do colaborador.
+
+faz uma desrjcao da ideia
+Descrição da ideia — FOCO SEGURO
+
+O FOCO SEGURO é uma solução digital criada para ajudar na prevenção de riscos relacionados à fadiga, perda de atenção e desgaste emocional dos trabalhadores.
+
+A plataforma permite que o colaborador realize, de forma rápida, individual e discreta, uma autoavaliação por meio de um teste de atenção e tempo de reação. Ao finalizar, ele recebe seu resultado e uma indicação sobre seu nível de atenção naquele momento.
+
+Caso o resultado indique uma situação que merece atenção, o sistema direciona o colaborador para uma área de Apoio, onde pode encontrar orientações e canais de acolhimento. A proposta é identificar sinais de desgaste precocemente e facilitar o acesso ao suporte, contribuindo para a segurança e o bem-estar no ambiente de trabalho.
+
+Binds Tecnologia da Informação Ltda.
+
+CX na plataforma #1 do Brasil
+
+Jornada, cliente interno e externo. NPS, CSAT e CES na plataforma #1 do Brasil.
+
+Anúncio
+Mais opções
+hoje 17:05
+Código colado(2).html
+Arquivo
+deixa pra poder fazer quantas vezes quiser mesmo
+
+Feito. Agora o FOCO SEGURO pode ser testado quantas vezes a pessoa quiser.
+
+Ficou assim:
+
+🎯 Teste pode ser iniciado novamente sempre que quiser
+🔄 O botão “Fazer o teste” continua disponível após cada resultado
+📊 Cada tentativa atualiza o resultado e o histórico
+🧠 Se o resultado for baixo, mostra primeiro o Resultado e depois vai para Apoio
+🤝 O Apoio continua aparecendo somente quando o resultado atual indicar necessidade de atenção
+❌ Não existe mais bloqueio depois da primeira tentativa
+
+📥 Baixar FOCO SEGURO — teste livre
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -1250,13 +1294,9 @@
             } catch (e) { }
             apoioTab.hidden = !lowResult;
             if (testeTab) testeTab.hidden = false;
-            if (resultCta) resultCta.hidden = completed;
+            if (resultCta) resultCta.hidden = false;
             function show() {
                 var id = (location.hash || '#trust').slice(1); if (!$(id)) id = 'trust';
-                if (completed && id === 'teste') {
-                    location.hash = '#resultado';
-                    return;
-                }
                 if (id === 'apoio' && !lowResult) {
                     location.hash = '#trust';
                     return;
@@ -1298,15 +1338,15 @@
                 var ah = []; try { ah = JSON.parse(localStorage.getItem('fs_acc') || '[]') } catch (e) { }
                 var am = ah.length ? ah.reduce(function (a, b) { return a + b }, 0) / ah.length : null;
                 var low = p < 70;
-                completed = true;
+                completed = false;
                 lowResult = low;
                 try {
-                    localStorage.setItem('fs_done_v4', '1');
+                    localStorage.removeItem('fs_done_v4');
                     localStorage.setItem('fs_low_v4', low ? '1' : '0');
                 } catch (e) { }
                 apoioTab.hidden = !low;
                 if (testeTab) testeTab.hidden = false;
-                if (resultCta) resultCta.hidden = true;
+                if (resultCta) resultCta.hidden = false;
                 $('care').hidden = !low;
                 h.push(avg); save(h.slice(-12)); ah.push(p); try { localStorage.setItem('fs_acc', JSON.stringify(ah.slice(-12))) } catch (e) { }
                 var series = base.concat([avg]).slice(-7), mx = Math.max.apply(null, series) * 1.1;
